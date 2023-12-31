@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Frontend Mentor | QR code component</title>
+
+    <style>
+        /* Gaya untuk tombol scan */
+    button {
+      padding: 12px 24px;
+      background-color: #007bff; /* Warna biru */
+      color: #fff; /* Warna teks putih */
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+    }
+
+    /* Efek hover */
+    button:hover {
+      background-color: #0056b3; /* Warna biru saat di-hover */
+    }
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="qr-container">
+      <div class="qr-img-container">
+        <img
+          src="./images/image-qr-code.png"
+          alt="qr code"
+          width="280px"
+          height="280px"
+          style="border-radius: 10px"
+        />
+      </div>
+      <div class="qr-content-container">
+        <h3>Scan Me</h3>
+        <a href="/k/CA.html"><button>Scan</button></a>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!-- <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div> -->
